@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChromaSense | 4-Box Consistency Check</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Color Consistency Checker</h1>
+            <p>4-Box Multi-Sample Analysis</p>
+        </header>
+
+        <main>
+            <section class="camera-section">
+                <div class="video-container">
+                    <div id="videoPlaceholder" class="video-placeholder">
+                        <div class="placeholder-content">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z">
+                                </path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            <p>Camera is Offline</p>
+                        </div>
+                    </div>
+                    <img id="videoFeed" src="" alt="Live Camera Feed" style="display: none;">
+                    <!-- Overlay handled by OpenCV drawing now, but we keep structure -->
+                    <div class="overlay" id="videoOverlay" style="display: none;"></div>
+                </div>
+
+                <div class="controls-container">
+                    <div class="input-group">
+                        <input type="text" id="cameraUrl"
+                            placeholder="Enter IP Camera URL (e.g. http://192.168.1.5:8080/video)" class="url-input">
+                    </div>
+                    <div class="controls">
+                        <button id="toggleBtn" class="btn-primary">
+                            <span class="icon">▶</span> Start Analysis
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="analysis-section">
+                <!-- Lighting Control -->
+                <div class="card lighting-card">
+                    <h2>Lighting Conditions</h2>
+                    <div class="lighting-selector">
+                        <select id="lightingSelect" class="select-input">
+                            <option value="D65">D65 (Artificial Daylight)</option>
+                            <option value="TL84">TL84 (Store Light)</option>
+                            <option value="CWF">CWF (Cool White Fluorescent)</option>
+                            <option value="A">Illuminant A (Incandescent)</option>
+                            <option value="UV">UV (Ultra Violet)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 4-Box Grid -->
+                <div class="box-grid">
+                    <div class="card box-card">
+                        <h3>Box 1</h3>
+                        <div class="color-display small" id="box1Display"></div>
+                        <span class="value" id="box1Hex">--</span>
+                    </div>
+                    <div class="card box-card">
+                        <h3>Box 2</h3>
+                        <div class="color-display small" id="box2Display"></div>
+                        <span class="value" id="box2Hex">--</span>
+                    </div>
+                    <div class="card box-card">
+                        <h3>Box 3</h3>
+                        <div class="color-display small" id="box3Display"></div>
+                        <span class="value" id="box3Hex">--</span>
+                    </div>
+                    <div class="card box-card">
+                        <h3>Box 4</h3>
+                        <div class="color-display small" id="box4Display"></div>
+                        <span class="value" id="box4Hex">--</span>
+                    </div>
+                </div>
+
+                <!-- Result Card -->
+                <div class="card result-card">
+                    <h2>Consistency Result</h2>
+                    <div class="result-metrics">
+                        <div class="metric">
+                            <span class="label">Max Deviation (ΔE)</span>
+                            <span class="value large" id="maxDeltaEValue">0.00</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Status</span>
+                            <div class="status-badge" id="passFailBadge">N/A</div>
+                        </div>
+                    </div>
+                    <p class="status-message" id="statusMessage">Start analysis to check consistency</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
