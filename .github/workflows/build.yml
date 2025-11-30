@@ -27,7 +27,8 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --name "ColorAnalysis" --add-data "templates;templates" --add-data "static;static" --onefile app.py
+        # Use --debug=all to see what's wrong if it fails again
+        pyinstaller --name "ColorAnalysis" --add-data "templates;templates" --add-data "static;static" --onefile --clean app.py
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
