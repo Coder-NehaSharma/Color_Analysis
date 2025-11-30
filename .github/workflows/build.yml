@@ -31,7 +31,7 @@ jobs:
         pyinstaller --name "ColorAnalysis" --add-data "templates;templates" --add-data "static;static" --onefile --clean app.py
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: ColorAnalysis-Windows-Exe
         path: dist/ColorAnalysis.exe
