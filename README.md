@@ -16,7 +16,7 @@ A real-time computer vision application that analyzes video feeds to ensure colo
 
 ## Installation & Running
 
-### Option 1: Download Windows Executable (No Code Required)
+### Option 1: Download Windows Executable 
 If you are on Windows and just want to run the app:
 1.  Go to the [Actions Tab](https://github.com/Coder-NehaSharma/Color_Analysis/actions).
 2.  Click on the latest successful run.
@@ -27,7 +27,7 @@ If you are on Windows and just want to run the app:
 1.  Clone the repository:
     ```bash
     git clone https://github.com/Coder-NehaSharma/Color_Analysis.git
-    cd ColorAnalysis
+    cd Color_Analysis
     ```
 2.  Install dependencies:
     ```bash
